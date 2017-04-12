@@ -1,0 +1,32 @@
+apply plugin: 'groovy'
+apply plugin: 'maven'
+
+configurations {
+    gradleApi
+    compile.extendsFrom gradleApi
+    gradleApi.extendsFrom groovy
+}
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+group='com.hello2mao.openapm.plugin'
+version='1.0.0'
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: uri('../repo'))
+        }
+    }
+    delete project.buildDir
+}
+dependencies {
+    compile gradleApi()
+    compile localGroovy()
+
+    compile 'com.android.tools.build:gradle:2.3.1'
+    compile files('src/main/libs/tools.jar')
+}
