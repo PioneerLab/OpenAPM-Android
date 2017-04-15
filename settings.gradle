@@ -1,1 +1,1 @@
-include ':sample', ':gradle-plugin'
+include ':sample', ':gradle-plugin', ':agent'

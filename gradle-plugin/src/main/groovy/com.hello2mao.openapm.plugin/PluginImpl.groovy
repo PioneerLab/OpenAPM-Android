@@ -2,9 +2,9 @@ package com.hello2mao.openapm.plugin
 
 import com.android.build.gradle.AppExtension
 import com.android.build.gradle.AppPlugin
+import com.hello2mao.openapm.plugin.tasks.ConfigTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import com.hello2mao.openapm.plugin.tasks.ConfigTask
 
 public class PluginImpl implements Plugin<Project> {
 

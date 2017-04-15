@@ -2,10 +2,10 @@ package com.hello2mao.openapm.plugin
 
 import com.android.build.api.transform.*
 import com.android.build.gradle.internal.pipeline.TransformManager
+import com.hello2mao.openapm.rewriter.Rewriter
 import org.apache.commons.codec.digest.DigestUtils
 import org.apache.commons.io.FileUtils
 import org.gradle.api.Project
-import com.hello2mao.openapm.rewriter.Rewriter
 
 public class TransformImpl extends Transform {
 
@@ -56,8 +56,10 @@ public class TransformImpl extends Transform {
             input.directoryInputs.each {DirectoryInput directoryInput->
                 //文件夹里面包含的是我们手写的类以及R.class、BuildConfig.class以及R$XXX.class等
 
-                //TODO 注入代码
-                Rewriter.injectDir(directoryInput.file.absolutePath, null)
+                directoryInput.file.eachFileRecurse { File file ->
+                    Rewriter.getInstance().injectFile(file.absolutePath, new HashMap<String, String>())
+                }
+
 
                 // 获取output目录
                 File dest = outputProvider.getContentLocation(directoryInput.name,
